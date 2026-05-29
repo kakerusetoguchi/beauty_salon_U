@@ -404,6 +404,12 @@
   font-family: 'Zen Kaku Gothic New', sans-serif;
 }
 
+.reservation-form label {
+  font-size: 0.8rem;
+  color: var(--text-lt);
+  letter-spacing: 0.08em;
+}
+
 .reservation-form textarea {
   min-height: 140px;
   resize: vertical;
@@ -414,6 +420,7 @@
   background: var(--sage);
   color: var(--white);
   border: none;
+  border-radius: 4px;
   font-size: 0.78rem;
   letter-spacing: 0.18em;
   cursor: pointer;
@@ -552,7 +559,7 @@
       <li><a href="#staff">Staff</a></li>
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#access">Access</a></li>
-      <li><a href="reservation">Reservation</a></li>
+      <li><a href="#reservation">Reservation</a></li>
     </ul>
   </nav>
 
@@ -743,7 +750,7 @@
       </select>
 
       <input type="date">
-
+　　　<label>希望日時</label>
       <textarea placeholder="Message"></textarea>
 
       <button type="submit">予約する</button>
