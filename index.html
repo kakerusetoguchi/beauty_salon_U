@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>カットサロン U</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Zen+Kaku+Gothic+New:wght@300;400&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Variables ===== */
+    :root {
+      --sage:      #7a8c6e;
+      --sage-lt:   #a3b394;
+      --sage-pale: #d6ddd0;
+      --cream:     #f7f4ee;
+      --warm:      #ede8df;
+      --earth:     #8b7355;
+      --text:      #3a3530;
+      --text-lt:   #6b6460;
+      --white:     #fdfcf9;
+    }
+
+    /* ===== Reset ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      font-weight: 300;
+      line-height: 1.9;
+      overflow-x: hidden;
+    }
+
+    /* ===== Nav ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(247, 244, 238, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(122,140,110,0.15);
+      transition: padding 0.3s;
+    }
+    .nav-logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: var(--sage);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 36px;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      color: var(--text-lt);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--sage);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--sage); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ===== Hero ===== */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--cream);
+    }
+    /* 背景：SVG 草葉テクスチャ */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cg fill='none' stroke='%237a8c6e' stroke-width='0.6' opacity='0.18'%3E%3Cellipse cx='30' cy='80' rx='8' ry='28' transform='rotate(-20 30 80)'/%3E%3Cellipse cx='80' cy='40' rx='6' ry='22' transform='rotate(15 80 40)'/%3E%3Cellipse cx='140' cy='100' rx='7' ry='25' transform='rotate(-10 140 100)'/%3E%3Cellipse cx='170' cy='50' rx='5' ry='18' transform='rotate(25 170 50)'/%3E%3Cellipse cx='60' cy='160' rx='8' ry='26' transform='rotate(-30 60 160)'/%3E%3Cellipse cx='130' cy='170' rx='6' ry='20' transform='rotate(10 130 170)'/%3E%3Cline x1='30' y1='52' x2='30' y2='108'/%3E%3Cline x1='80' y1='18' x2='80' y2='62'/%3E%3Cline x1='140' y1='75' x2='140' y2='125'/%3E%3Cline x1='170' y1='32' x2='170' y2='68'/%3E%3Cline x1='60' y1='134' x2='60' y2='186'/%3E%3Cline x1='130' y1='150' x2='130' y2='190'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      opacity: 0.6;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 1.2s ease both;
+    }
+    .hero-en {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(4rem, 12vw, 8rem);
+      color: var(--sage);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-ja {
+      font-size: 0.78rem;
+      letter-spacing: 0.32em;
+      color: var(--text-lt);
+      margin-bottom: 32px;
+      text-transform: uppercase;
+    }
+    .hero-sub {
+      font-size: 0.92rem;
+      color: var(--text-lt);
+      letter-spacing: 0.1em;
+      margin-bottom: 48px;
+      line-height: 2;
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 40px;
+      border: 1px solid var(--sage);
+      color: var(--sage);
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+    }
+    .btn:hover {
+      background: var(--sage);
+      color: var(--white);
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--sage-lt);
+      animation: bounce 2s infinite;
+    }
+    .scroll-hint span { font-size: 1.1rem; }
+
+    /* ===== Section Base ===== */
+    section { padding: 100px 24px; }
+    .section-label {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1rem;
+      color: var(--sage-lt);
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 48px;
+      line-height: 1.3;
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--sage);
+    }
+    .inner { max-width: 960px; margin: 0 auto; }
+
+    /* divider */
+    .divider {
+      width: 40px; height: 1px;
+      background: var(--sage-lt);
+      margin: 0 0 20px;
+    }
+
+    /* ===== Concept ===== */
+    #concept {
+      background: var(--white);
+    }
+    .concept-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .concept-img {
+      aspect-ratio: 3/4;
+      background: var(--sage-pale);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* 葉っぱのSVGイラスト（画像プレースホルダー） */
+    .concept-img svg { width: 60%; opacity: 0.35; }
+    .concept-img .img-label {
+      position: absolute;
+      bottom: 20px; right: 20px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 0.9rem;
+      color: var(--sage);
+      opacity: 0.7;
+    }
+    .concept-text p {
+      font-size: 0.95rem;
+      color: var(--text-lt);
+      margin-bottom: 20px;
+      line-height: 2.1;
+    }
+    .concept-values {
+      display: flex;
+      gap: 24px;
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+    .concept-val {
+      padding: 8px 20px;
+      border: 1px solid var(--sage-pale);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      color: var(--sage);
+      background: var(--cream);
+    }
+
+    /* ===== Menu ===== */
+    #menu { background: var(--cream); }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--sage-pale);
+    }
+    .menu-card {
+      background: var(--white);
+      padding: 40px 32px;
+    }
+    .menu-icon {
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .menu-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .menu-name-ja {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      color: var(--text-lt);
+      margin-bottom: 16px;
+    }
+    .menu-items { list-style: none; }
+    .menu-items li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--sage-pale);
+      font-size: 0.88rem;
+      color: var(--text-lt);
+    }
+    .menu-items li:last-child { border-bottom: none; }
+    .price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--sage);
+      white-space: nowrap;
+      margin-left: 12px;
+    }
+    .menu-note {
+      margin-top: 40px;
+      padding: 20px 28px;
+      background: var(--warm);
+      font-size: 0.82rem;
+      color: var(--text-lt);
+      letter-spacing: 0.06em;
+      line-height: 2;
+    }
+
+    /* ===== Staff ===== */
+    #staff { background: var(--white); }
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+    .staff-card { text-align: center; }
+    .staff-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--sage-pale);
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      max-width: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: var(--sage);
+      opacity: 0.6;
+    }
+    .staff-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .staff-role {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--sage);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .staff-bio {
+      font-size: 0.84rem;
+      color: var(--text-lt);
+      line-height: 1.9;
+    }
+    .staff-specialty {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 14px;
+      background: var(--sage-pale);
+      font-size: 0.75rem;
+      color: var(--sage);
+      letter-spacing: 0.1em;
+    }
+
+    /* ===== Gallery ===== */
+    #gallery { background: var(--cream); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 4px;
+    }
+    .gallery-item {
+      background: var(--sage-pale);
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      opacity: 0.55;
+      transition: opacity 0.3s, transform 0.3s;
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item:hover { opacity: 0.8; transform: scale(1.02); }
+    .gallery-item:nth-child(1) {
+      grid-column: span 2;
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+    .gallery-item .gal-label {
+      position: absolute;
+      bottom: 12px; left: 14px;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: var(--sage);
+      font-family: 'Dancing Script', cursive;
+    }
+
+    /* ===== Access ===== */
+    #access { background: var(--white); }
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .access-map {
+      aspect-ratio: 4/3;
+      background: var(--sage-pale);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      color: var(--sage);
+      letter-spacing: 0.1em;
+      position: relative;
+      overflow: hidden;
+    }
+    /* 地図っぽいSVGパターン */
+    .access-map::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23d6ddd0' width='300' height='300'/%3E%3Crect fill='%23c5cfc0' x='0' y='120' width='300' height='20'/%3E%3Crect fill='%23c5cfc0' x='140' y='0' width='20' height='300'/%3E%3Crect fill='%23eef1eb' x='30' y='40' width='80' height='60'/%3E%3Crect fill='%23eef1eb' x='170' y='160' width='70' height='50'/%3E%3Crect fill='%23eef1eb' x='40' y='180' width='60' height='70'/%3E%3Ccircle fill='%237a8c6e' cx='150' cy='130' r='8'/%3E%3C/svg%3E");
+      background-size: cover;
+      opacity: 0.7;
+    }
+    .map-pin {
+      position: relative;
+      z-index: 1;
+      background: var(--sage);
+      color: white;
+      padding: 6px 16px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+    .access-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+    .info-row {
+      display: flex;
+      gap: 20px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--sage-pale);
+      font-size: 0.88rem;
+    }
+    .info-row:last-of-type { border-bottom: none; }
+    .info-label {
+      min-width: 80px;
+      color: var(--sage);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      padding-top: 2px;
+    }
+    .info-val { color: var(--text-lt); line-height: 1.8; }
+    .access-btn {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 14px 36px;
+      background: var(--sage);
+      color: var(--white);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background 0.3s;
+    }
+    .access-btn:hover { background: var(--earth); }
+
+    /* ===== Footer ===== */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 48px 24px;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+    }
+    footer .footer-logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      color: var(--sage-lt);
+      display: block;
+      margin-bottom: 16px;
+    }
+    footer p { margin-top: 8px; }
+
+    /* ===== Animations ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section { padding: 72px 20px; }
+      .concept-grid,
+      .access-grid { grid-template-columns: 1fr; gap: 40px; }
+      .menu-grid,
+      .staff-grid { grid-template-columns: 1fr; gap: 2px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:nth-child(1) { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="#hero" class="nav-logo">Cut Salon U</a>
+    <ul class="nav-links">
+      <li><a href="#concept">Concept</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#staff">Staff</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#access">Access</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-inner">
+      <p class="hero-ja">Cut Salon</p>
+      <h1 class="hero-en">U</h1>
+      <p class="hero-sub">
+        自分らしさを、もっと自由に。<br>
+        ナチュラルに、心地よく。
+      </p>
+      <a href="#concept" class="btn">Explore</a>
+    </div>
+    <div class="scroll-hint">
+      <span>↓</span>
+      scroll
+    </div>
+  </section>
+
+  <!-- Concept -->
+  <section id="concept">
+    <div class="inner">
+      <div class="concept-grid">
+        <div class="concept-img">
+          <svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#7a8c6e" stroke-width="1.2">
+            <path d="M50 130 Q50 70 30 30 Q50 50 70 30 Q50 70 50 130Z"/>
+            <path d="M50 100 Q40 80 20 75" stroke-dasharray="3 3"/>
+            <path d="M50 85  Q60 65 80 60" stroke-dasharray="3 3"/>
+            <line x1="50" y1="130" x2="50" y2="80"/>
+          </svg>
+          <span class="img-label">Natural &amp; Healing</span>
+        </div>
+        <div class="concept-text">
+          <span class="section-label">Our Concept</span>
+          <div class="divider"></div>
+          <h2 class="section-title">あなたらしい<br><em>自然体</em>の美しさへ</h2>
+          <p>
+            カットサロン U は、男女問わず訪れていただける、
+            ナチュラルで温かみのある空間です。
+          </p>
+          <p>
+            流行を追うのではなく、お客さまひとりひとりの
+            個性や生活スタイルに合ったスタイルをご提案。
+            植物由来のケア剤にこだわり、頭皮と髪本来の美しさを引き出します。
+          </p>
+          <p>
+            忙しい日常から少し離れ、ゆったりとした時間を
+            ぜひお楽しみください。
+          </p>
+          <div class="concept-values">
+            <span class="concept-val">Natural</span>
+            <span class="concept-val">Healing</span>
+            <span class="concept-val">Sustainable</span>
+            <span class="concept-val">For Everyone</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu">
+    <div class="inner">
+      <span class="section-label">Price Menu</span>
+      <div class="divider"></div>
+      <h2 class="section-title">メニュー &amp; <em>料金</em></h2>
+      <div class="menu-grid">
+        <!-- Cut -->
+        <div class="menu-card">
+          <span class="menu-icon">✂️</span>
+          <div class="menu-name">Cut</div>
+          <div class="menu-name-ja">カット</div>
+          <ul class="menu-items">
+            <li><span>カット（シャンプーなし）</span><span class="price">¥4,000</span></li>
+            <li><span>カット＋シャンプー</span><span class="price">¥5,500</span></li>
+            <li><span>カット＋シャンプー＋ブロー</span><span class="price">¥6,500</span></li>
+            <li><span>前髪カット</span><span class="price">¥1,000</span></li>
+          </ul>
+        </div>
+        <!-- Color -->
+        <div class="menu-card">
+          <span class="menu-icon">🎨</span>
+          <div class="menu-name">Color</div>
+          <div class="menu-name-ja">カラー</div>
+          <ul class="menu-items">
+            <li><span>リタッチカラー</span><span class="price">¥6,000〜</span></li>
+            <li><span>フルカラー</span><span class="price">¥8,000〜</span></li>
+            <li><span>ハイライト</span><span class="price">¥10,000〜</span></li>
+            <li><span>イヤリングカラー</span><span class="price">¥4,000〜</span></li>
+          </ul>
+        </div>
+        <!-- Treatment -->
+        <div class="menu-card">
+          <span class="menu-icon">🌿</span>
+          <div class="menu-name">Treatment</div>
+          <div class="menu-name-ja">トリートメント</div>
+          <ul class="menu-items">
+            <li><span>ナチュラルケア</span><span class="price">¥2,500〜</span></li>
+            <li><span>集中補修トリートメント</span><span class="price">¥4,000〜</span></li>
+            <li><span>ヘッドスパ（30分）</span><span class="price">¥4,500</span></li>
+            <li><span>ヘッドスパ（60分）</span><span class="price">¥7,500</span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="menu-note">
+        ※ 表示価格はすべて税込みです。<br>
+        ※ 髪の長さ・量によって料金が異なる場合があります。詳細はお気軽にお問い合わせください。
+      </p>
+    </div>
+  </section>
+
+  <!-- Staff -->
+  <section id="staff">
+    <div class="inner">
+      <span class="section-label">Our Team</span>
+      <div class="divider"></div>
+      <h2 class="section-title">スタッフ <em>紹介</em></h2>
+      <div class="staff-grid">
+        <div class="staff-card">
+          <div class="staff-photo">🌿</div>
+          <div class="staff-name">Maruyama Yumi</div>
+          <div class="staff-role">Stylist / Owner</div>
+          <p class="staff-bio">
+            頭皮ケアにも精通。植物由来の施術にこだわっています。
+            カラーリングのスペシャリスト。
+            透明感のある発色と、傷みにくい施術でリピーター多数。
+          </p>
+          <span class="staff-specialty">カラー・ハイライト</span>
+        </div>
+        <div class="staff-card">
+          <div class="staff-photo">🌱</div>
+          <div class="staff-name">Maruyama Takanobu</div>
+          <div class="staff-role">Stylist</div>
+          <p class="staff-bio">
+            メンズ・レディース問わず幅広いスタイルに対応。
+            骨格診断に基づいたカットが好評です。
+          </p>
+          <span class="staff-specialty">カット・スタイリング</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <div class="inner">
+      <span class="section-label">Gallery</span>
+      <div class="divider"></div>
+      <h2 class="section-title">施術 <em>ギャラリー</em></h2>
+      <div class="gallery-grid">
+        <div class="gallery-item" style="font-size:3rem;">✂️<span class="gal-label">Style Works</span></div>
+        <div class="gallery-item">🌿</div>
+        <div class="gallery-item">💆</div>
+        <div class="gallery-item">🎨</div>
+        <div class="gallery-item">✨</div>
+        <div class="gallery-item">🌸</div>
+        <div class="gallery-item">🪴</div>
+      </div>
+      <p style="margin-top:20px; font-size:0.8rem; color:var(--text-lt); letter-spacing:0.08em;">
+        ※ 実際の施術写真は Instagram でもご覧いただけます。
+      </p>
+    </div>
+  </section>
+
+  <!-- Access -->
+  <section id="access">
+    <div class="inner">
+      <span class="section-label">Access</span>
+      <div class="divider"></div>
+      <h2 class="section-title">アクセス &amp; <em>営業情報</em></h2>
+      <div class="access-grid">
+        <div class="access-map">
+          <span class="map-pin">📍 Cut Salon U</span>
+        </div>
+        <div class="access-info">
+          <h3>Cut Salon U</h3>
+          <div class="info-row">
+            <span class="info-label">住所</span>
+            <span class="info-val">〒892-0871<br>鹿児島県鹿児島市吉野町 ４０２２－７</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">TEL</span>
+            <span class="info-val">xxx-xxxx-xxxx</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">営業時間</span>
+            <span class="info-val">平日 10:00 〜 20:00<br>土日祝 9:00 〜 19:00</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">定休日</span>
+            <span class="info-val">毎週金曜日</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">アクセス</span>
+            <span class="info-val">菖蒲谷バス停から徒歩4分</span>
+          </div>
+          <a href="#" class="access-btn">予約する</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-logo">Cut Salon U</span>
+    <p>ナチュラルに、心地よく。男女問わず、あなたらしさを大切に。</p>
+    <p style="margin-top:20px;">&copy; 2026 Cut Salon U. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
