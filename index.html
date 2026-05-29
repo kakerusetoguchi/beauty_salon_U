@@ -380,7 +380,49 @@
       color: var(--sage);
       font-family: 'Dancing Script', cursive;
     }
+/* ===== Reservation ===== */
 
+#reservation {
+  background: var(--cream);
+}
+
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 700px;
+}
+
+.reservation-form input,
+.reservation-form select,
+.reservation-form textarea {
+  padding: 16px;
+  border: 1px solid var(--sage-pale);
+  background: var(--white);
+  font-size: 0.9rem;
+  color: var(--text);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
+.reservation-form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.reservation-form button {
+  padding: 16px;
+  background: var(--sage);
+  color: var(--white);
+  border: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.reservation-form button:hover {
+  background: var(--earth);
+}
     /* ===== Access ===== */
     #access { background: var(--white); }
     .access-grid {
@@ -510,6 +552,7 @@
       <li><a href="#staff">Staff</a></li>
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#access">Access</a></li>
+      <li><a href="reservation">Reservation</a></li>
     </ul>
   </nav>
 
@@ -674,7 +717,40 @@
       </p>
     </div>
   </section>
+<!-- Reservation -->
+<section id="reservation">
+  <div class="inner">
+    <span class="section-label">Reservation</span>
+    <div class="divider"></div>
 
+    <h2 class="section-title">
+      ご予約 <em>フォーム</em>
+    </h2>
+
+    <form class="reservation-form">
+
+      <input type="text" placeholder="Your Name">
+
+      <input type="tel" placeholder="Phone Number">
+
+      <input type="email" placeholder="E-mail Address">
+
+      <select>
+        <option>メニューを選択</option>
+        <option>カット</option>
+        <option>カラー</option>
+        <option>トリートメント</option>
+      </select>
+
+      <input type="date">
+
+      <textarea placeholder="Message"></textarea>
+
+      <button type="submit">予約する</button>
+
+    </form>
+  </div>
+</section>
   <!-- Access -->
   <section id="access">
     <div class="inner">
@@ -707,7 +783,7 @@
             <span class="info-label">アクセス</span>
             <span class="info-val">菖蒲谷バス停から徒歩4分</span>
           </div>
-          <a href="#" class="access-btn">予約する</a>
+          <a href="#reservation" class="access-btn">予約する</a>
         </div>
       </div>
     </div>
